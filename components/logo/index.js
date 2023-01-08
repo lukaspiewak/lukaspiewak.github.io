@@ -1,8 +1,11 @@
-import {CustomElement} from '../components.js';
-import templateHtml from './template.html';
+import { CustomElement } from "../components.js";
+const templateHtml = fetch("components/logo/template.html");
+
 class Logo extends CustomElement {
-    constructor() {
-        super('div',templateHtml);
-    }
+  async connectedCallback() {
+    let res = await templateHtml;
+    let template = await res.text();
+    this.render("div", template);
+  }
 }
-export default () => customElements.define('logo-lukens', Logo);
+export default () => customElements.define("logo-lukens", Logo);

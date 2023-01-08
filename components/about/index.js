@@ -1,8 +1,11 @@
-import {CustomElement} from '../components.js';
-import templateHtml from './template.html';
+import { CustomElement } from "../components.js";
+const templateHtml = fetch("components/about/template.html");
+
 class AboutMe extends CustomElement {
-    constructor() {
-        super('div',templateHtml);
-    }
+  async connectedCallback() {
+    let res = await templateHtml;
+    let template = await res.text();
+    this.render("div", template);
+  }
 }
-export default () => customElements.define('about-me', AboutMe);
+export default () => customElements.define("about-me", AboutMe);
